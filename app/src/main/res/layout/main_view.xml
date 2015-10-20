@@ -6,6 +6,7 @@
     <fragment
         android:id="@+id/movies_fragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        class="es.adrianmarin.movies.presentation.view.movies.MoviesFragment"/>
 
 </RelativeLayout>
