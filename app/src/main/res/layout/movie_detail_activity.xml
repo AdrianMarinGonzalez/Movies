@@ -3,9 +3,10 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
+    <fragment
         android:id="@+id/movie_detail_fragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        class="es.adrianmarin.movies.presentation.view.movie.MovieDetailFragment"/>
 
 </RelativeLayout>

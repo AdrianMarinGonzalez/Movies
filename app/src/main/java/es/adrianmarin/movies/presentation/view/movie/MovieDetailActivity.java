@@ -30,19 +30,6 @@ public class MovieDetailActivity extends BaseActivity {
         setContentView(view);
         ButterKnife.bind(this);
 
-        initView();
-
-    }
-
-    private void initView() {
-        Bundle bundle = getIntent().getExtras();
-        MovieViewModel model = bundle.getParcelable(MOVIE_VIEW_MODEL_KEY);
-
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.movie_detail_fragment, MovieDetailFragment.newInstance(model))
-                .disallowAddToBackStack()
-                .commit();
     }
 
     @Override

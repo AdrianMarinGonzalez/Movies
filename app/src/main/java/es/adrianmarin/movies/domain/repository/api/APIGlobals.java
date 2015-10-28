@@ -1,4 +1,4 @@
-package es.adrianmarin.movies.model.repository.api;
+package es.adrianmarin.movies.domain.repository.api;
 
 /**
  * @author Adrián Marín González

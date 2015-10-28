@@ -1,14 +1,8 @@
 package es.adrianmarin.movies.commons;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import es.adrianmarin.movies.model.model.movie_detail.MovieDetail;
-import es.adrianmarin.movies.model.model.movies.Movie;
+import es.adrianmarin.movies.domain.model.movie_detail.MovieDetail;
 import es.adrianmarin.movies.presentation.presenter.models.BusinessMovieDetail;
-import es.adrianmarin.movies.presentation.presenter.movies.models.BusinessMovie;
 import es.adrianmarin.movies.presentation.view.movie.model.MovieDetailViewModel;
-import es.adrianmarin.movies.presentation.view.movies.models.MovieViewModel;
 
 /**
  * @author Adrián Marín González

@@ -2,6 +2,7 @@ package es.adrianmarin.movies.presentation.view.movies;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,6 +19,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import de.greenrobot.event.EventBus;
 import es.adrianmarin.movies.R;
+import es.adrianmarin.movies.base.BaseActivity;
 import es.adrianmarin.movies.base.BaseFragment;
 import es.adrianmarin.movies.presentation.presenter.movies.MoviesPresenter;
 import es.adrianmarin.movies.presentation.view.movies.contributors.MoviesAdapter;
@@ -30,21 +32,25 @@ import es.adrianmarin.movies.presentation.view.movies.models.MovieViewModel;
  * @author Adrián Marín González
  * @since 20/10/15.
  */
-public class MoviesFragment extends BaseFragment implements MoviesView,
+public class MoviesFragment extends Fragment implements MoviesView,
                                                         MoviesAdapter.OnMovieClickListener,
                                                         SwipeRefreshLayout.OnRefreshListener {
 
     @Bind(R.id.swipe_container) SwipeRefreshLayout mSwipeRefreshContainer;
     @Bind(R.id.movies_list) RecyclerView mMoviesList;
-    @Bind(R.id.loading_more) ProgressBar mLoadingMoreProgress;
 
     private MoviesAdapter mMoviesAdapter;
     @Inject MoviesPresenter mPresenter;
     private LinearLayoutManager mLayoutManager;
 
+    @Inject
+    public MoviesFragment(){}
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        BaseActivity activity = (BaseActivity) getActivity();
+        activity.inject(this);
         mMoviesAdapter = new MoviesAdapter(getActivity(), this);
         mLayoutManager = new LinearLayoutManager(getActivity());
 
@@ -80,8 +86,14 @@ public class MoviesFragment extends BaseFragment implements MoviesView,
         mPresenter.unSubscribeEvents();
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
+        mPresenter.unSubscribeEvents();
+    }
+
     private void initListView(){
-//        mMoviesList.scheduleLayoutAnimation();
         mMoviesList.setAdapter(mMoviesAdapter);
         mMoviesList.setLayoutManager(mLayoutManager);
         mMoviesList.setOnScrollListener(new ScrollEndRecyclerViewListener(mLayoutManager) {
@@ -131,6 +143,7 @@ public class MoviesFragment extends BaseFragment implements MoviesView,
 
     @Override
     public void onRefresh() {
+        clear();
         mPresenter.getMovies(1);
     }
 }

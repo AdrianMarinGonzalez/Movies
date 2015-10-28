@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.inject.Singleton;
 
 import es.adrianmarin.movies.R;
@@ -21,19 +20,22 @@ import es.adrianmarin.movies.utils.ScreenUtils;
 @Singleton
 public class NavigationHelper {
 
-    @Inject Context mContext;
+    Context mContext;
+    @Inject MovieDetailFragment mMovieDetailFragment;
 
     @Inject
-    public NavigationHelper(Context context){
+    public NavigationHelper(Context context, MovieDetailFragment movieDetailFragment){
         mContext = context;
+        mMovieDetailFragment = movieDetailFragment;
     }
 
     public void navigateToMovieDetail(MovieViewModel movie) {
         if (ScreenUtils.isLandscape(mContext)) {
+            mMovieDetailFragment.setMovieViewModel(movie);
             ((BaseActivity)mContext).getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.movie_detail_fragment,
-                            MovieDetailFragment.newInstance(movie))
+                            mMovieDetailFragment)
                     .commit();
         } else {
             Intent intent = new Intent(mContext, MovieDetailActivity.class);

@@ -7,7 +7,7 @@ import javax.inject.Singleton;
 
 import de.greenrobot.event.EventBus;
 import es.adrianmarin.movies.commons.MovieDetailModelMapper;
-import es.adrianmarin.movies.model.interactors.movie_detail.GetMovieDetail;
+import es.adrianmarin.movies.domain.interactors.movie_detail.GetMovieDetail;
 import es.adrianmarin.movies.presentation.presenter.models.BusinessMovieDetail;
 import es.adrianmarin.movies.presentation.view.movie.MovieDetailView;
 import es.adrianmarin.movies.presentation.view.movie.model.MovieDetailViewModel;
@@ -36,24 +36,24 @@ public class MovieDetailPresenterImp implements MovieDetailPresenter {
 
     @Override
     public void onEvent(BusinessMovieDetail businessMovie) {
-        EventBus.getDefault().unregister(this);
         MovieDetailViewModel viewModel = MovieDetailModelMapper.businessToViewMovie(businessMovie);
         mView.setMovieDetail(viewModel);
     }
 
     @Override
     public void getMovieDetail(Long id) {
-        EventBus.getDefault().register(this);
         mGetMovieDetail.execute(id);
     }
 
     @Override
     public void subscribeEvents() {
-
+        EventBus.getDefault().register(this);
+        mGetMovieDetail.subscribeEvents();
     }
 
     @Override
     public void unSubscribeEvents() {
-
+        EventBus.getDefault().unregister(this);
+        mGetMovieDetail.unSubscriveEvents();
     }
 }

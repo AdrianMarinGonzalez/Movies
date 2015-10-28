@@ -14,7 +14,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import es.adrianmarin.movies.R;
-import es.adrianmarin.movies.model.repository.api.APIGlobals;
+import es.adrianmarin.movies.domain.repository.api.APIGlobals;
 import es.adrianmarin.movies.presentation.view.movies.models.MovieViewModel;
 import es.adrianmarin.movies.utils.ImageUtils;
 

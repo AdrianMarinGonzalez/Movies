@@ -1,4 +1,4 @@
-package es.adrianmarin.movies.model.model.movies;
+package es.adrianmarin.movies.domain.model.movies;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

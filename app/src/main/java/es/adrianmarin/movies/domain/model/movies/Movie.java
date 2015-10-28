@@ -1,4 +1,4 @@
-package es.adrianmarin.movies.model.model.movies;
+package es.adrianmarin.movies.domain.model.movies;
 import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.annotations.Expose;

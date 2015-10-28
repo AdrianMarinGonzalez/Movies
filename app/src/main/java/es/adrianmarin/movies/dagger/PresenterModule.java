@@ -6,8 +6,8 @@ import javax.inject.Named;
 
 import dagger.Module;
 import dagger.Provides;
-import es.adrianmarin.movies.model.interactors.movie_detail.GetMovieDetailImp;
-import es.adrianmarin.movies.model.interactors.movies.GetMoviesImp;
+import es.adrianmarin.movies.domain.interactors.movie_detail.GetMovieDetailImp;
+import es.adrianmarin.movies.domain.interactors.movies.GetMoviesImp;
 import es.adrianmarin.movies.presentation.presenter.NavigationHelper;
 import es.adrianmarin.movies.presentation.presenter.movie.MovieDetailPresenter;
 import es.adrianmarin.movies.presentation.presenter.movie.MovieDetailPresenterImp;

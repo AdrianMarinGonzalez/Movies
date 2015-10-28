@@ -1,11 +1,9 @@
 package es.adrianmarin.movies.dagger;
 
-import javax.inject.Named;
-
 import dagger.Module;
 import dagger.Provides;
-import es.adrianmarin.movies.model.repository.MoviesRepository;
-import es.adrianmarin.movies.model.repository.api.MoviesAPIRepository;
+import es.adrianmarin.movies.domain.repository.MoviesRepository;
+import es.adrianmarin.movies.domain.repository.api.MoviesAPIRepository;
 
 /**
  * @author Adrián Marín González

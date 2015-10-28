@@ -22,18 +22,6 @@ public class BusinessMovieDetail {
     public BusinessMovieDetail() {
     }
 
-    public BusinessMovieDetail(Long id, String originalTitle, String backdropPath, String title, String tagline, String status, String releaseDate, String overview, String homepage) {
-        this.id = id;
-        this.originalTitle = originalTitle;
-        this.backdropPath = backdropPath;
-        this.title = title;
-        this.tagline = tagline;
-        this.status = status;
-        this.releaseDate = releaseDate;
-        this.overview = overview;
-        this.homepage = homepage;
-    }
-
     public Long getId() {
         return id;
     }

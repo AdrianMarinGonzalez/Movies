@@ -1,6 +1,5 @@
-package es.adrianmarin.movies.model.model.movie_detail;
+package es.adrianmarin.movies.domain.model.movie_detail;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;

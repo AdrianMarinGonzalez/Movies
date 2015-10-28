@@ -1,4 +1,4 @@
-package es.adrianmarin.movies.model.interactors.movie_detail;
+package es.adrianmarin.movies.domain.interactors.movie_detail;
 
 import android.content.Context;
 
@@ -7,8 +7,8 @@ import javax.inject.Inject;
 
 import de.greenrobot.event.EventBus;
 import es.adrianmarin.movies.commons.MovieDetailModelMapper;
-import es.adrianmarin.movies.model.model.movie_detail.MovieDetail;
-import es.adrianmarin.movies.model.repository.MoviesRepository;
+import es.adrianmarin.movies.domain.model.movie_detail.MovieDetail;
+import es.adrianmarin.movies.domain.repository.MoviesRepository;
 import es.adrianmarin.movies.presentation.presenter.models.BusinessMovieDetail;
 
 /**
@@ -26,15 +26,23 @@ public class GetMovieDetailImp implements GetMovieDetail {
 
     @Override
     public void execute(Long id){
-        EventBus.getDefault().register(this);
         repository.getMovieDetail(id);
     }
 
     @Override
     public void onEvent(MovieDetail movieDetail) {
-        EventBus.getDefault().unregister(this);
         BusinessMovieDetail businessMovieDetail = MovieDetailModelMapper.modelToBusinessMovie(movieDetail);
         EventBus.getDefault().post(businessMovieDetail);
+    }
+
+    @Override
+    public void subscribeEvents() {
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void unSubscriveEvents() {
+        EventBus.getDefault().unregister(this);
     }
 
 }

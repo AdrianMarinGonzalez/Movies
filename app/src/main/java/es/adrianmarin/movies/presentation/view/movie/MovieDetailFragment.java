@@ -2,6 +2,7 @@ package es.adrianmarin.movies.presentation.view.movie;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +14,8 @@ import javax.inject.Inject;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import es.adrianmarin.movies.R;
-import es.adrianmarin.movies.base.BaseFragment;
-import es.adrianmarin.movies.model.repository.api.APIGlobals;
+import es.adrianmarin.movies.base.BaseActivity;
+import es.adrianmarin.movies.domain.repository.api.APIGlobals;
 import es.adrianmarin.movies.presentation.presenter.movie.MovieDetailPresenter;
 import es.adrianmarin.movies.presentation.view.movie.model.MovieDetailViewModel;
 import es.adrianmarin.movies.presentation.view.movies.models.MovieViewModel;
@@ -24,7 +25,7 @@ import es.adrianmarin.movies.utils.ImageUtils;
  * @author Adrián Marín González
  * @since 20/10/15.
  */
-public class MovieDetailFragment extends BaseFragment implements MovieDetailView{
+public class MovieDetailFragment extends Fragment implements MovieDetailView{
 
     private static final String MOVIE_VIEW_MODEL_KEY = "MOVIE_VIEW_MODEL";
     @Bind(R.id.backdrop) ImageView mBackdrop;
@@ -33,14 +34,23 @@ public class MovieDetailFragment extends BaseFragment implements MovieDetailView
     @Bind(R.id.release_date) TextView mReleaseDate;
     @Bind(R.id.overview) TextView mOverview;
 
-    @Inject
-    MovieDetailPresenter mPresenter;
+    @Inject MovieDetailPresenter mPresenter;
 
     private Long mMovieId;
+
+    @Inject
+    public MovieDetailFragment(){
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ((BaseActivity) getActivity()).inject(this);
+        if (mMovieId==null){
+            Bundle bundle = getActivity().getIntent().getExtras();
+            MovieViewModel model = bundle.getParcelable(MOVIE_VIEW_MODEL_KEY);
+            mMovieId = model.getId();
+        }
     }
 
     @Nullable
@@ -50,8 +60,6 @@ public class MovieDetailFragment extends BaseFragment implements MovieDetailView
 
         ButterKnife.bind(this, rootView);
 
-        initView();
-
         return rootView;
     }
 
@@ -60,15 +68,7 @@ public class MovieDetailFragment extends BaseFragment implements MovieDetailView
         super.onViewCreated(view, savedInstanceState);
         mPresenter.setView(this);
         mPresenter.subscribeEvents();
-        mPresenter.getMovieDetail(mMovieId);
-    }
-
-    private void initView() {
-        Bundle bundle = getArguments();
-
-        MovieViewModel model = bundle.getParcelable(MOVIE_VIEW_MODEL_KEY);
-
-        mMovieId = model.getId();
+        initView();
     }
 
     @Override
@@ -82,15 +82,11 @@ public class MovieDetailFragment extends BaseFragment implements MovieDetailView
         mPresenter.unSubscribeEvents();
     }
 
-    public static MovieDetailFragment newInstance(MovieViewModel movieViewModel) {
-        MovieDetailFragment movieDetailFragment = new MovieDetailFragment();
-
-        Bundle bundle = new Bundle();
-        bundle.putParcelable(MOVIE_VIEW_MODEL_KEY, movieViewModel);
-
-        movieDetailFragment.setArguments(bundle);
-
-        return movieDetailFragment;
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
+        mPresenter.unSubscribeEvents();
     }
 
     @Override
@@ -104,5 +100,14 @@ public class MovieDetailFragment extends BaseFragment implements MovieDetailView
         mOverview.setText(movieDetail.getOverview());
         mReleaseDate.setText(movieDetail.getReleaseDate());
 
+    }
+
+    public void setMovieViewModel(MovieViewModel movieViewModel) {
+        mMovieId = movieViewModel.getId();
+        if (mPresenter != null) mPresenter.getMovieDetail(mMovieId);
+    }
+
+    private void initView(){
+        mPresenter.getMovieDetail(mMovieId);
     }
 }

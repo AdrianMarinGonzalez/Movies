@@ -4,11 +4,11 @@ import android.content.Context;
 
 import dagger.Module;
 import dagger.Provides;
-import es.adrianmarin.movies.model.interactors.movie_detail.GetMovieDetail;
-import es.adrianmarin.movies.model.interactors.movie_detail.GetMovieDetailImp;
-import es.adrianmarin.movies.model.interactors.movies.GetMovies;
-import es.adrianmarin.movies.model.interactors.movies.GetMoviesImp;
-import es.adrianmarin.movies.model.repository.MoviesRepository;
+import es.adrianmarin.movies.domain.interactors.movie_detail.GetMovieDetail;
+import es.adrianmarin.movies.domain.interactors.movie_detail.GetMovieDetailImp;
+import es.adrianmarin.movies.domain.interactors.movies.GetMovies;
+import es.adrianmarin.movies.domain.interactors.movies.GetMoviesImp;
+import es.adrianmarin.movies.domain.repository.MoviesRepository;
 
 /**
  * @author Adrián Marín González

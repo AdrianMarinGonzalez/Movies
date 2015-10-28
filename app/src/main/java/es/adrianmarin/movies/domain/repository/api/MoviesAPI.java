@@ -1,7 +1,7 @@
-package es.adrianmarin.movies.model.repository.api;
+package es.adrianmarin.movies.domain.repository.api;
 
-import es.adrianmarin.movies.model.model.movie_detail.MovieDetail;
-import es.adrianmarin.movies.model.model.movies.MovieList;
+import es.adrianmarin.movies.domain.model.movie_detail.MovieDetail;
+import es.adrianmarin.movies.domain.model.movies.MovieList;
 import retrofit.Callback;
 import retrofit.http.GET;
 import retrofit.http.Path;

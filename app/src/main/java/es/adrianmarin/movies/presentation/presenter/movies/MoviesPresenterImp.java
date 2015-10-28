@@ -9,7 +9,7 @@ import javax.inject.Singleton;
 
 import de.greenrobot.event.EventBus;
 import es.adrianmarin.movies.commons.MovieModelMapper;
-import es.adrianmarin.movies.model.interactors.movies.GetMovies;
+import es.adrianmarin.movies.domain.interactors.movies.GetMovies;
 import es.adrianmarin.movies.presentation.presenter.NavigationHelper;
 import es.adrianmarin.movies.presentation.presenter.movies.models.BusinessMovie;
 import es.adrianmarin.movies.presentation.view.movies.MoviesFragment;
@@ -38,11 +38,13 @@ public class MoviesPresenterImp implements MoviesPresenter {
     @Override
     public void subscribeEvents() {
         EventBus.getDefault().register(this);
+        mGetMovies.subscribeEvents();
     }
 
     @Override
     public void unSubscribeEvents() {
         EventBus.getDefault().unregister(this);
+        mGetMovies.unSubscriveEvents();
     }
 
     @Override
