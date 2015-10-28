@@ -126,8 +126,7 @@ public class MoviesFragment extends BaseFragment implements MoviesView,
 
     @Override
     public void onMovieClicked(View view, int position) {
-//        mPresenter.presentMovieDetail(mMoviesAdapter.getItem(position));
-        EventBus.getDefault().post(new MovieClickedEvent(mMoviesAdapter.getItem(position)));
+        mPresenter.presentMovieDetail(mMoviesAdapter.getItem(position));
     }
 
     @Override

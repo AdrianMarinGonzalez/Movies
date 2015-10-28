@@ -69,7 +69,7 @@ public class MoviesPresenterImp implements MoviesPresenter {
 
     @Override
     public void presentMovieDetail(MovieViewModel movie) {
-//        mNavigationHelper.navigateToMovieDetail(movie);
+        mNavigationHelper.navigateToMovieDetail(movie);
     }
 
 }

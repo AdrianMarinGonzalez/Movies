@@ -12,7 +12,7 @@ public abstract class BaseFragment extends Fragment{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MoviesApplication app = (MoviesApplication) getActivity().getApplicationContext();
-        app.inject(this);
+        BaseActivity activity = (BaseActivity) getActivity();
+        activity.inject(this);
     }
 }

@@ -23,25 +23,7 @@ import es.adrianmarin.movies.presentation.view.movies.MoviesFragment;
  * @author Adrián Marín González
  * @since 20/10/15.
  */
-@Module(includes = {
-        RepositoryModule.class,
-        InteractorModule.class,
-        PresenterModule.class,
-        NavigatorModule.class
-},
-        injects = {
-                MoviesAPIRepository.class,
-                GetMoviesImp.class,
-                GetMovieDetailImp.class,
-                MoviesPresenterImp.class,
-                MovieDetailPresenterImp.class,
-                MoviesFragment.class,
-                MovieDetailFragment.class,
-                MoviesActivity.class,
-                MovieDetailActivity.class,
-                NavigationHelper.class,
-                MoviesApplication.class
-        },
+@Module(injects = MoviesApplication.class,
         library = true,
         complete  = false)
 public class RootModule {

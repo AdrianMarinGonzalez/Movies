@@ -8,7 +8,6 @@ import java.util.List;
 
 import dagger.ObjectGraph;
 import es.adrianmarin.movies.dagger.ActivityModule;
-import es.adrianmarin.movies.dagger.RootModule;
 
 /**
  * @author Adrián Marín González
@@ -25,10 +24,14 @@ public abstract class BaseActivity extends FragmentActivity {
         MoviesApplication application = (MoviesApplication)getApplication();
 //        List<Object> modules = getModules();
         List<Object> modules = new ArrayList<Object>();
-//        modules.add(new ActivityModule(this));
+        modules.add(new ActivityModule(this));
         mGraph = application.plus(modules);
-        mGraph.inject(this);
+        inject(this);
 
+    }
+
+    public void inject(Object object){
+        mGraph.inject(object);
     }
 
     protected abstract List<Object> getModules();

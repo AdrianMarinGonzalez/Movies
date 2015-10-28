@@ -21,7 +21,7 @@ import es.adrianmarin.movies.utils.ScreenUtils;
 @Singleton
 public class NavigationHelper {
 
-    private Context mContext;
+    @Inject Context mContext;
 
     @Inject
     public NavigationHelper(Context context){

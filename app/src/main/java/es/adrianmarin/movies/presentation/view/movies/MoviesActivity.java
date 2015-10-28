@@ -41,28 +41,11 @@ public class MoviesActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        EventBus.getDefault().register(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        EventBus.getDefault().unregister(this);
-    }
-
-    public void onEvent(MovieClickedEvent event){
-
-        if (ScreenUtils.isLandscape(this)){
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.movie_detail_fragment,
-                            MovieDetailFragment.newInstance(event.getMovieViewModel()))
-                    .commit();
-        }else {
-            Intent intent = new Intent(this, MovieDetailActivity.class);
-            intent.putExtra(MovieDetailActivity.MOVIE_VIEW_MODEL_KEY, event.getMovieViewModel());
-            startActivity(intent);
-        }
     }
 
     @Override
