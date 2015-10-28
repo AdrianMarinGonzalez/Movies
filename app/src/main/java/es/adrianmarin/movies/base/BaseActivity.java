@@ -1,16 +1,14 @@
 package es.adrianmarin.movies.base;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.view.LayoutInflater;
-import android.view.View;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import dagger.ObjectGraph;
-import es.adrianmarin.movies.R;
-import es.adrianmarin.movies.dagger.BaseModule;
+import es.adrianmarin.movies.dagger.ActivityModule;
+import es.adrianmarin.movies.dagger.RootModule;
 
 /**
  * @author Adrián Marín González
@@ -24,19 +22,13 @@ public abstract class BaseActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        initView();
-
         MoviesApplication application = (MoviesApplication)getApplication();
-        List<Object> modules = getModules();
-        modules.add(new BaseModule(this));
+//        List<Object> modules = getModules();
+        List<Object> modules = new ArrayList<Object>();
+//        modules.add(new ActivityModule(this));
         mGraph = application.plus(modules);
         mGraph.inject(this);
 
-    }
-
-    private void initView(){
-        View rootView = LayoutInflater.from(this).inflate(R.layout.main_view, null);
-        setContentView(rootView);
     }
 
     protected abstract List<Object> getModules();

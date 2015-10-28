@@ -3,15 +3,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+
+        <include layout="@layout/layout_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"/>
+
+    </android.support.design.widget.AppBarLayout>
     <fragment
         android:id="@+id/movies_fragment"
         android:layout_width="300dp"
         android:layout_height="match_parent"
-        class="es.adrianmarin.movies.presentation.view.movies.MoviesFragment"/>
+        class="es.adrianmarin.movies.presentation.view.movies.MoviesFragment"
+        android:layout_below="@id/toolbar"/>
 
     <FrameLayout
         android:id="@+id/movie_detail_fragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/movies_fragment"
+        android:layout_below="@id/toolbar"/>
 
 </RelativeLayout>

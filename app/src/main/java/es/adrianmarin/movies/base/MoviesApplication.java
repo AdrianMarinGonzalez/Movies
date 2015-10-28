@@ -30,6 +30,10 @@ public class MoviesApplication extends Application{
         };
     }
 
+    public void inject(Object object) {
+        mGraph.inject(object);
+    }
+
     public ObjectGraph plus(List<Object> modules) {
         return mGraph.plus(modules.toArray());
     }

@@ -1,13 +1,23 @@
 package es.adrianmarin.movies.presentation.view.movies;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Toast;
 
 import java.util.LinkedList;
 import java.util.List;
 
 import butterknife.ButterKnife;
+import de.greenrobot.event.EventBus;
+import es.adrianmarin.movies.R;
 import es.adrianmarin.movies.base.BaseActivity;
-import es.adrianmarin.movies.dagger.MoviesModule;
+import es.adrianmarin.movies.dagger.ActivityModule;
+import es.adrianmarin.movies.presentation.view.movie.MovieDetailFragment;
+import es.adrianmarin.movies.presentation.view.movie.MovieDetailActivity;
+import es.adrianmarin.movies.presentation.view.movies.models.MovieClickedEvent;
+import es.adrianmarin.movies.utils.ScreenUtils;
 
 /**
  * @author Adrián Marín González
@@ -19,14 +29,47 @@ public class MoviesActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        View view = LayoutInflater.from(this)
+                                .inflate(R.layout.main_view, null);
+
+        setContentView(view);
+
         ButterKnife.bind(this);
 
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        EventBus.getDefault().unregister(this);
+    }
+
+    public void onEvent(MovieClickedEvent event){
+
+        if (ScreenUtils.isLandscape(this)){
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.movie_detail_fragment,
+                            MovieDetailFragment.newInstance(event.getMovieViewModel()))
+                    .commit();
+        }else {
+            Intent intent = new Intent(this, MovieDetailActivity.class);
+            intent.putExtra(MovieDetailActivity.MOVIE_VIEW_MODEL_KEY, event.getMovieViewModel());
+            startActivity(intent);
+        }
+    }
+
+    @Override
     protected List<Object> getModules() {
         List<Object> modules = new LinkedList<Object>();
-        modules.add(new MoviesModule());
         return modules;
     }
+
+
 }
