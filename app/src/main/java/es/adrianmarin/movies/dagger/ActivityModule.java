@@ -23,7 +23,6 @@ import es.adrianmarin.movies.presentation.view.movies.MoviesFragment;
 @Module(includes = {
             RepositoryModule.class,
             InteractorModule.class,
-            FragmentModule.class,
             PresenterModule.class,
             NavigatorModule.class
         },

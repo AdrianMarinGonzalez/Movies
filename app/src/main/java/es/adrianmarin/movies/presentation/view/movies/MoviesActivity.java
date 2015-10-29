@@ -1,7 +1,10 @@
 package es.adrianmarin.movies.presentation.view.movies;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
@@ -38,6 +41,7 @@ public class MoviesActivity extends BaseActivity {
 
     }
 
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -46,6 +50,16 @@ public class MoviesActivity extends BaseActivity {
     @Override
     protected void onPause() {
         super.onPause();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
     }
 
     @Override

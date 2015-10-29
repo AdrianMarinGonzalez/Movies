@@ -13,6 +13,8 @@ import es.adrianmarin.movies.presentation.presenter.movie.MovieDetailPresenter;
 import es.adrianmarin.movies.presentation.presenter.movie.MovieDetailPresenterImp;
 import es.adrianmarin.movies.presentation.presenter.movies.MoviesPresenter;
 import es.adrianmarin.movies.presentation.presenter.movies.MoviesPresenterImp;
+import es.adrianmarin.movies.presentation.view.movie.MovieDetailFragment;
+import es.adrianmarin.movies.presentation.view.movies.MoviesFragment;
 
 /**
  * @author Adrián Marín González
@@ -20,7 +22,11 @@ import es.adrianmarin.movies.presentation.presenter.movies.MoviesPresenterImp;
  */
 @Module(
         complete = false,
-        library = true
+        library = true,
+        injects =
+                {MoviesFragment.class,
+                        MovieDetailFragment.class
+                }
 )
 public class PresenterModule {
 
