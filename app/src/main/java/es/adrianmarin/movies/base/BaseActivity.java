@@ -31,7 +31,8 @@ public abstract class BaseActivity extends FragmentActivity {
     }
 
     public void inject(Object object){
-        mGraph.inject(object);
+        if (mGraph!=null)
+            mGraph.inject(object);
     }
 
     protected abstract List<Object> getModules();

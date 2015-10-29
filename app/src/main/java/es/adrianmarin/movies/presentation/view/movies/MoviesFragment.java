@@ -32,7 +32,7 @@ import es.adrianmarin.movies.presentation.view.movies.models.MovieViewModel;
  * @author Adrián Marín González
  * @since 20/10/15.
  */
-public class MoviesFragment extends Fragment implements MoviesView,
+public class MoviesFragment extends BaseFragment implements MoviesView,
                                                         MoviesAdapter.OnMovieClickListener,
                                                         SwipeRefreshLayout.OnRefreshListener {
 
@@ -43,14 +43,9 @@ public class MoviesFragment extends Fragment implements MoviesView,
     @Inject MoviesPresenter mPresenter;
     private LinearLayoutManager mLayoutManager;
 
-    @Inject
-    public MoviesFragment(){}
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        BaseActivity activity = (BaseActivity) getActivity();
-        activity.inject(this);
         mMoviesAdapter = new MoviesAdapter(getActivity(), this);
         mLayoutManager = new LinearLayoutManager(getActivity());
 

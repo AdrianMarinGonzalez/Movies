@@ -8,6 +8,7 @@ import javax.inject.Singleton;
 import de.greenrobot.event.EventBus;
 import es.adrianmarin.movies.commons.MovieDetailModelMapper;
 import es.adrianmarin.movies.domain.interactors.movie_detail.GetMovieDetail;
+import es.adrianmarin.movies.presentation.presenter.NavigationHelper;
 import es.adrianmarin.movies.presentation.presenter.models.BusinessMovieDetail;
 import es.adrianmarin.movies.presentation.view.movie.MovieDetailView;
 import es.adrianmarin.movies.presentation.view.movie.model.MovieDetailViewModel;
